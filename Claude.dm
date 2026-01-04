@@ -1,13 +1,22 @@
 # Claude Development Memory
 
+## ⚠️ CRITICAL: ALWAYS READ THIS FILE FIRST ⚠️
+
+**Before writing ANY code, you MUST:**
+1. Read this entire file (Claude.dm) to understand project requirements
+2. Follow TDD methodology (see below)
+3. Write tests FIRST, then implement code
+4. Run lint and tests before pushing (pre-push hook is configured)
+
 ## Development Principles
 
-### Test-Driven Development (TDD)
-- **All code must be written using TDD methodology**
-- Write tests first (Red), then implement code to pass (Green), then refactor (Refactor)
+### Test-Driven Development (TDD) - MANDATORY
+- **ALL code must be written using TDD methodology - NO EXCEPTIONS**
+- **Workflow: Write tests FIRST (Red), then implement code to pass (Green), then refactor (Refactor)**
 - Maintain high test coverage (>80%)
-- Tests should be written before any new feature or bug fix
+- Tests should be written BEFORE any new feature or bug fix
 - Refactor existing code to be testable and add tests for all functionality
+- **If you skip writing tests first, you are violating project requirements**
 
 ### Code Quality
 - Use TypeScript for type safety
@@ -29,13 +38,20 @@
 - **jsdom** for DOM simulation
 
 ### Test Commands
-- `npm test` - Run all tests
-- `npm run test:watch` - Watch mode
-- `npm run test:ui` - UI mode
-- `npm run test:coverage` - Coverage report
+- `yarn test` - Run all tests
+- `yarn test:watch` - Watch mode
+- `yarn test:ui` - UI mode
+- `yarn test:coverage` - Coverage report
+
+### Pre-Push Hooks
+- **Git pre-push hook is configured** to automatically run:
+  1. `yarn lint` - ESLint checks
+  2. `yarn test --run` - All tests
+- Push will be blocked if lint or tests fail
+- Always ensure lint and tests pass before attempting to push
 
 ### Current Test Status
-- ✅ 90 tests passing
+- ✅ 101 tests passing (as of latest run)
 - ✅ Core business logic covered (storage, schemas, utilities)
 - ✅ Component tests (TextBlock, HeadingBlock, ButtonBlock)
 - ✅ API route tests (pages, locales)
