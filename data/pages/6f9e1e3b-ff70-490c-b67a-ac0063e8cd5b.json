@@ -1,8 +1,8 @@
 {
-  "id": "3fdf7462-837c-42c3-9c3d-acc6e4cae0f2",
-  "slug": "test-slug-retrieve",
+  "id": "6f9e1e3b-ff70-490c-b67a-ac0063e8cd5b",
+  "slug": "test-save-english",
   "locales": {
-    "en": {
+    "sv": {
       "title": "",
       "content": [],
       "seo": {
@@ -11,7 +11,7 @@
         "jsonSchemas": []
       }
     },
-    "sv": {
+    "en": {
       "title": "",
       "content": [],
       "seo": {
@@ -21,6 +21,6 @@
       }
     }
   },
-  "createdAt": "2026-01-04T11:12:10.952Z",
-  "updatedAt": "2026-01-04T11:12:10.954Z"
+  "createdAt": "2026-01-04T11:18:22.590Z",
+  "updatedAt": "2026-01-04T11:18:22.591Z"
 }

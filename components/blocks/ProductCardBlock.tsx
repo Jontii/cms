@@ -65,7 +65,7 @@ export function ProductCardBlockEditor({ block, onChange }: BlockEditorProps) {
         <label className="block text-sm font-medium">Availability</label>
         <select
           value={props.availability || ''}
-          onChange={(e) => onChange({ ...props, availability: e.target.value as any })}
+          onChange={(e) => onChange({ ...props, availability: e.target.value as 'InStock' | 'OutOfStock' | 'PreOrder' | '' })}
           className="w-full p-2 border rounded"
         >
           <option value="">Select...</option>

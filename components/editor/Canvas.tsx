@@ -11,7 +11,7 @@ import { BlockEditor } from './BlockEditor';
 
 interface CanvasProps {
   blocks: Block[];
-  onBlockChange: (blockId: string, props: Record<string, any>) => void;
+  onBlockChange: (blockId: string, props: Record<string, unknown>) => void;
   onBlockDelete: (blockId: string) => void;
   locale: string;
 }
@@ -23,7 +23,7 @@ function SortableBlockItem({
   locale,
 }: {
   block: Block;
-  onBlockChange: (blockId: string, props: Record<string, any>) => void;
+  onBlockChange: (blockId: string, props: Record<string, unknown>) => void;
   onBlockDelete: () => void;
   locale: string;
 }) {

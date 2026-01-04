@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   DndContext,
   DragOverlay,
@@ -14,7 +15,7 @@ import {
   DragStartEvent,
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
-import { Block } from '@/types/block';
+import { Block, BlockType } from '@/types/block';
 import { Page } from '@/types/page';
 import { LocaleConfig } from '@/types/locale';
 import { Canvas } from '@/components/editor/Canvas';
@@ -476,7 +477,7 @@ export default function EditorPage() {
     seo: { title: '', description: '', jsonSchemas: [] },
   };
 
-  const handleBlockChange = (blockId: string, props: Record<string, any>) => {
+  const handleBlockChange = (blockId: string, props: Record<string, unknown>) => {
     if (!page) return;
     const updated = currentLocaleData.content.map((b) =>
       b.id === blockId ? { ...b, props: { ...b.props, ...props } } : b
@@ -529,12 +530,12 @@ export default function EditorPage() {
               >
                 Preview
               </a>
-              <a
+              <Link
                 href="/admin"
                 className="px-3 py-1 text-sm border rounded hover:bg-gray-50"
               >
                 Back to Pages
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex-1 overflow-hidden">
@@ -591,7 +592,7 @@ export default function EditorPage() {
         {draggedBlockType ? (
           <div className="p-4 border rounded bg-white shadow-lg opacity-90">
             <div className="text-sm font-medium">
-              {blockRegistry.get(draggedBlockType as any)?.label || draggedBlockType}
+              {blockRegistry.get(draggedBlockType as BlockType)?.label || draggedBlockType}
             </div>
             <div className="text-xs text-gray-500 mt-1">{draggedBlockType}</div>
           </div>

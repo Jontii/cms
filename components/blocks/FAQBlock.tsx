@@ -72,7 +72,7 @@ export function FAQBlockEditor({ block, onChange }: BlockEditorProps) {
         </div>
       ))}
       {items.length === 0 && (
-        <p className="text-sm text-gray-500">No FAQ items yet. Click "Add Item" to get started.</p>
+        <p className="text-sm text-gray-500">No FAQ items yet. Click &quot;Add Item&quot; to get started.</p>
       )}
     </div>
   );

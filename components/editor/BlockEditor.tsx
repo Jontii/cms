@@ -5,7 +5,7 @@ import { blockRegistry } from '@/lib/editor/blockRegistry';
 
 interface BlockEditorProps {
   block: Block;
-  onChange: (props: Record<string, any>) => void;
+  onChange: (props: Record<string, unknown>) => void;
   onDelete: () => void;
   locale: string;
 }

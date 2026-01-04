@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { NextRequest } from 'next/server';
 import { GET } from '@/app/api/locales/route';
+import { LocaleConfig } from '@/types/locale';
 
 describe('Locales API Route', () => {
   describe('GET /api/locales', () => {
@@ -28,7 +29,7 @@ describe('Locales API Route', () => {
       const response = await GET(request);
       
       const data = await response.json();
-      data.forEach((locale: any) => {
+      data.forEach((locale: LocaleConfig) => {
         expect(locale).toHaveProperty('code');
         expect(locale).toHaveProperty('name');
         expect(typeof locale.code).toBe('string');

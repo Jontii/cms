@@ -3,7 +3,7 @@ import { Block } from './block';
 export interface JsonLdSchema {
   '@context': string;
   '@type': string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface PageLocale {
