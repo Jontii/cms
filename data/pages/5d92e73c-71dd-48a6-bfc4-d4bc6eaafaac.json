@@ -1,0 +1,54 @@
+{
+  "id": "5d92e73c-71dd-48a6-bfc4-d4bc6eaafaac",
+  "slug": "testing",
+  "locales": {
+    "en": {
+      "title": "Testing",
+      "content": [
+        {
+          "id": "b850fc7d-a43c-4cba-bce3-1c9855f0b9c7",
+          "type": "text",
+          "props": {},
+          "order": 0
+        },
+        {
+          "id": "d7993ada-93ad-44f5-a67c-c55c986a9f9f",
+          "type": "image",
+          "props": {},
+          "order": 1
+        },
+        {
+          "id": "d511fcaf-51fa-4f13-bb3f-57283636b47d",
+          "type": "button",
+          "props": {},
+          "order": 2
+        }
+      ],
+      "seo": {
+        "title": "seo title",
+        "description": "seo desription",
+        "jsonSchemas": []
+      }
+    },
+    "sv": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    },
+    "no": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    }
+  },
+  "createdAt": "2026-01-04T10:29:55.964Z",
+  "updatedAt": "2026-01-04T10:39:07.457Z"
+}

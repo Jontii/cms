@@ -1,0 +1,26 @@
+{
+  "id": "cbea13d5-185a-4cac-8d17-e5c152862648",
+  "slug": "page-1",
+  "locales": {
+    "en": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    },
+    "sv": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    }
+  },
+  "createdAt": "2026-01-04T10:42:19.318Z",
+  "updatedAt": "2026-01-04T10:42:19.318Z"
+}

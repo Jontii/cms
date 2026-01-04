@@ -1,0 +1,35 @@
+{
+  "id": "ed206297-c938-4bc6-ae7e-40f6a64f6ee1",
+  "slug": "page-3",
+  "locales": {
+    "en": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    },
+    "sv": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    },
+    "no": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    }
+  },
+  "createdAt": "2026-01-04T10:36:56.922Z",
+  "updatedAt": "2026-01-04T10:36:56.922Z"
+}

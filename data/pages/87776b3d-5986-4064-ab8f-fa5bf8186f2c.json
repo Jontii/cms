@@ -1,0 +1,26 @@
+{
+  "id": "87776b3d-5986-4064-ab8f-fa5bf8186f2c",
+  "slug": "test-save",
+  "locales": {
+    "en": {
+      "title": "Updated Title",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    },
+    "sv": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    }
+  },
+  "createdAt": "2026-01-04T10:43:28.802Z",
+  "updatedAt": "2026-01-04T10:43:28.814Z"
+}

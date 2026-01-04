@@ -1,0 +1,26 @@
+{
+  "id": "bf21919d-bc6c-4ea4-a3ec-f78774274848",
+  "slug": "page-3",
+  "locales": {
+    "en": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    },
+    "sv": {
+      "title": "",
+      "content": [],
+      "seo": {
+        "title": "",
+        "description": "",
+        "jsonSchemas": []
+      }
+    }
+  },
+  "createdAt": "2026-01-04T10:42:19.323Z",
+  "updatedAt": "2026-01-04T10:42:19.323Z"
+}
