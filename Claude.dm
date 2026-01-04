@@ -48,7 +48,9 @@
   1. `yarn lint` - ESLint checks
   2. `yarn test --run` - All tests
 - Push will be blocked if lint or tests fail
+- **DO NOT push code until the complete TDD cycle is finished (Red-Green-Refactor)**
 - Always ensure lint and tests pass before attempting to push
+- Commit and push only after completing the full TDD workflow (tests written, implementation complete, refactored if needed)
 
 ### Current Test Status
 - ✅ 101 tests passing (as of latest run)

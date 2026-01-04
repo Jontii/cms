@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { getPageBySlug } from '@/lib/storage/pages';
 import { getLocales } from '@/lib/storage/locales';
 import { BlockRenderer } from '@/components/public/BlockRenderer';
@@ -10,6 +11,7 @@ registerAllBlocks();
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -34,10 +36,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function PublicPage({ params }: PageProps) {
+export default async function PublicPage({ params, searchParams }: PageProps) {
   const { locale, slug } = await params;
+  const searchParamsData = await searchParams;
   const page = await getPageBySlug(slug);
   const locales = await getLocales();
+  const isEditorPreview = searchParamsData.editor === 'true' && searchParamsData.pageId;
 
   if (!page) {
     notFound();
@@ -96,6 +100,16 @@ export default async function PublicPage({ params }: PageProps) {
       )}
       <div className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
+          {isEditorPreview && (
+            <div className="mb-4">
+              <Link
+                href={`/admin/editor/${searchParamsData.pageId}`}
+                className="inline-flex items-center px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+              >
+                ← Back to Editor
+              </Link>
+            </div>
+          )}
           <h1 className="text-3xl font-bold mb-6">{localeData.title}</h1>
           <BlockRenderer blocks={localeData.content} locale={locale} />
         </div>

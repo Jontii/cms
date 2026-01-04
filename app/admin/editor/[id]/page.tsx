@@ -523,7 +523,7 @@ export default function EditorPage() {
                 {saving ? 'Saving...' : 'Save'}
               </button>
               <a
-                href={`/${currentLocale}/${page.slug}`}
+                href={`/${currentLocale}/${page.slug}?editor=true&pageId=${page.id}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-3 py-1 text-sm border rounded hover:bg-gray-50"
