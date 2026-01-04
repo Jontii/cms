@@ -148,7 +148,11 @@ export default function EditorPage() {
       const oldIndex = currentBlocks.findIndex((b) => b.id === active.id);
       const newIndex = currentBlocks.findIndex((b) => b.id === over.id);
       const newBlocks = arrayMove(currentBlocks, oldIndex, newIndex);
-      const reordered = reorderBlocks(newBlocks, oldIndex, newIndex);
+      // Update order values to match the new positions
+      const reordered = newBlocks.map((block, index) => ({
+        ...block,
+        order: index,
+      }));
       handleBlocksChange(reordered);
     }
 
@@ -156,7 +160,7 @@ export default function EditorPage() {
     setDraggedBlockType(null);
   };
 
-  const handleBlocksChange = async (blocks: Block[]) => {
+  const handleBlocksChange = (blocks: Block[]) => {
     if (!page) return;
 
     // Ensure locales object exists
@@ -197,7 +201,7 @@ export default function EditorPage() {
           return null;
         }
       })
-      .filter(Boolean);
+      .filter((schema): schema is NonNullable<typeof schema> => schema !== null);
 
     const updatedPage = {
       ...page,
@@ -215,20 +219,6 @@ export default function EditorPage() {
     };
 
     setPage(updatedPage);
-
-    // Auto-save
-    setSaving(true);
-    try {
-      await fetch(`/api/pages/${page.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedPage),
-      });
-    } catch (error) {
-      console.error('Failed to save:', error);
-    } finally {
-      setSaving(false);
-    }
   };
 
   const handleCreatePage = async () => {
@@ -263,7 +253,87 @@ export default function EditorPage() {
     setCurrentLocale(locale);
   };
 
-  const handleTitleChange = async (title: string) => {
+  const handleSave = async () => {
+    if (!page) return;
+
+    // Ensure locales object exists
+    if (!page.locales) {
+      page.locales = {};
+    }
+
+    // Ensure current locale exists
+    if (!page.locales[currentLocale]) {
+      page.locales[currentLocale] = {
+        title: '',
+        content: [],
+        seo: {
+          title: '',
+          description: '',
+          jsonSchemas: [],
+        },
+      };
+    }
+
+    // Regenerate JSON-LD schemas for SEO blocks before saving
+    const currentBlocks = page.locales[currentLocale].content || [];
+    const jsonSchemas = currentBlocks
+      .map((block) => {
+        try {
+          switch (block.type) {
+            case 'companyCard':
+              return generateCompanySchema(block.props, currentLocale);
+            case 'productCard':
+              return generateProductSchema(block.props, currentLocale);
+            case 'article':
+              return generateArticleSchema(block.props, currentLocale);
+            case 'faq':
+              return generateFAQSchema(block.props, currentLocale);
+            default:
+              return null;
+          }
+        } catch {
+          return null;
+        }
+      })
+      .filter((schema): schema is NonNullable<typeof schema> => schema !== null);
+
+    const pageToSave = {
+      ...page,
+      locales: {
+        ...page.locales,
+        [currentLocale]: {
+          ...page.locales[currentLocale],
+          seo: {
+            ...page.locales[currentLocale].seo,
+            jsonSchemas,
+          },
+        },
+      },
+    };
+
+    setSaving(true);
+    try {
+      const response = await fetch(`/api/pages/${page.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pageToSave),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save page');
+      }
+
+      const savedPage = await response.json();
+      setPage(savedPage);
+    } catch (error) {
+      console.error('Failed to save:', error);
+      alert('Failed to save page. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleTitleChange = (title: string) => {
     if (!page) return;
 
     // Ensure locales object exists
@@ -296,19 +366,9 @@ export default function EditorPage() {
     };
 
     setPage(updatedPage);
-
-    try {
-      await fetch(`/api/pages/${page.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedPage),
-      });
-    } catch (error) {
-      console.error('Failed to save:', error);
-    }
   };
 
-  const handleSEOChange = async (field: 'title' | 'description', value: string) => {
+  const handleSEOChange = (field: 'title' | 'description', value: string) => {
     if (!page) return;
 
     // Ensure locales object exists
@@ -344,16 +404,6 @@ export default function EditorPage() {
     };
 
     setPage(updatedPage);
-
-    try {
-      await fetch(`/api/pages/${page.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedPage),
-      });
-    } catch (error) {
-      console.error('Failed to save:', error);
-    }
   };
 
   if (loading) {
@@ -462,11 +512,15 @@ export default function EditorPage() {
                 currentLocale={currentLocale}
                 onLocaleChange={handleLocaleChange}
               />
-              {saving && (
-                <span className="text-sm text-gray-500">Saving...</span>
-              )}
             </div>
             <div className="flex items-center gap-2">
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="px-4 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {saving ? 'Saving...' : 'Save'}
+              </button>
               <a
                 href={`/${currentLocale}/${page.slug}`}
                 target="_blank"
